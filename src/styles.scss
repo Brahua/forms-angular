@@ -33,7 +33,7 @@ $custom-typography: mat-typography-config(
 html, body {
   height: 100%;
   margin: 0;
-  background-image: url('/assets/memphis-mini.png');
+  background-image: url('assets/memphis-mini.png');
 }
 
 .card-json {
@@ -46,7 +46,7 @@ html, body {
 .bg {
   content: "";
   z-index: -1;
-  background-image: url('/assets/img2.svg');
+  background-image: url('assets/img2.svg');
   background-position: right bottom;
   background-repeat: no-repeat;
   background-size: contain;
