@@ -1,0 +1,96 @@
+@import '~@angular/material/theming';
+@include mat-core();
+
+// Available color palettes: https://material.io/design/color/
+$candy-app-primary: mat-palette($mat-light-blue, A700);
+$candy-app-accent:  mat-palette($mat-orange, 100);
+$candy-app-warn: mat-palette($mat-red, 600);
+
+$candy-app-theme: mat-light-theme($candy-app-primary, $candy-app-accent, $candy-app-warn);
+$custom-typography: mat-typography-config(
+  $font-family: 'Open Sans'
+);
+
+@include angular-material-typography($custom-typography);
+@include angular-material-theme($candy-app-theme);
+
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/mixins";
+@import "~bootstrap/scss/reboot";
+@import "~bootstrap/scss/grid";
+@import "~bootstrap/scss/tables";
+@import "~bootstrap/scss/alert";
+@import "~bootstrap/scss/utilities";
+@import "~bootstrap/scss/jumbotron";
+@import "~bootstrap/scss/navbar";
+
+
+* {
+  font-family: 'Open Sans', sans-serif;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  background-image: url('/assets/memphis-mini.png');
+}
+
+.card-json {
+  background-color: #2F4F4F;
+  color:#fff;
+  border-radius: 0px 0px 15px 15px;
+  box-shadow: 0px 0px 25px rgba($color: #000000, $alpha: 0.3);
+}
+
+.bg {
+  content: "";
+  z-index: -1;
+  background-image: url('/assets/img2.svg');
+  background-position: right bottom;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.card-form {
+  border-radius: 15px 15px 0px 0px;
+  background-color: #fff;
+  box-shadow: 0px 0px 15px rgba($color: #000000, $alpha: 0.3);
+}
+
+.bg1::after {
+  content: "";
+  opacity: 0.3;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: -1;
+  background-image: url('/assets/img1.svg');
+  background-position: right bottom;
+  background-repeat: no-repeat;
+}
+
+.bg2::after {
+  content: "";
+  opacity: 0.3;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: -1;
+  background-image: url('/assets/img2.svg');
+  background-position: right bottom;
+  background-repeat: no-repeat;
+}
+
+@media screen and (max-width: 1024px) {
+  .bg1::after, .bg2::after {
+    content: "";
+    background-size: 50%;
+  }
+}
+
+

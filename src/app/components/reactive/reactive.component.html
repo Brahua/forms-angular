@@ -1,0 +1,132 @@
+<div class="bg2"></div>
+<div class="jumbotron jumbotron-fluid bg" style="background-color: #FA8072; color: #fff;">
+  <div class="container">
+    <h1 class="display-4">Reactive Forms</h1>
+  </div>
+</div>
+<div class="container">
+  <div class="card-form p-4">
+    <form autocomplete="off" [formGroup]="formReactive" (ngSubmit)="guardar()">
+
+      <mat-form-field class="w-100">
+        <mat-label>Nombre</mat-label>
+        <input matInput type="text" name="nombre" formControlName="nombre">
+        <mat-error *ngIf="nombreNoValido">
+          Este campo debe contener <strong>5 letras</strong> como mínimo
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="w-100">
+        <mat-label>Apellidos</mat-label>
+        <input matInput type="text" name="apellido" formControlName="apellido">
+        <mat-error *ngIf="apellidoNoValido">
+          Este campo es <strong>requerido</strong>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="w-100">
+        <mat-label>Correo</mat-label>
+        <input matInput type="email" name="correo" formControlName="correo">
+        <mat-error *ngIf="correoNoValido">
+          Correo <strong>inválido</strong>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="w-100">
+        <mat-label>Usuario</mat-label>
+        <input matInput type="text" name="usuario" formControlName="usuario">
+        <mat-error *ngIf="usuarioNoValido">
+          Este usuario ya existe
+        </mat-error>
+        <mat-error *ngIf="formReactive.get('usuario').hasError('required')">
+          Este campo es <strong>requerido</strong>
+        </mat-error>
+      </mat-form-field>
+
+      <div class="row" formGroupName="direccion">
+        <div class="col-12">
+          <p>Dirección</p>
+        </div>
+        <div class="col-12 col-sm-6">
+          <mat-form-field class="w-100">
+            <mat-label>Distrito</mat-label>
+            <input matInput type="text" name="distrito" formControlName="distrito">
+            <mat-error *ngIf="distritoNoValido">
+              Este campo es <strong>requerido</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-12 col-sm-6">
+          <mat-form-field class="w-100">
+            <mat-label>Ciudad</mat-label>
+            <input matInput type="text" name="ciudad" formControlName="ciudad">
+            <mat-error *ngIf="ciudadNoValido">
+              Este campo es <strong>requerido</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <mat-form-field class="w-100">
+        <mat-label>Contraseña</mat-label>
+        <input matInput type="password" name="pass1" formControlName="pass1">
+        <mat-error *ngIf="pass1NoValido">
+          Este campo es <strong>requerido</strong>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="w-100">
+        <mat-label>Repita Contraseña</mat-label>
+        <input matInput type="password" name="pass2" formControlName="pass2">
+        <mat-error *ngIf="pass2NoValido">
+          Este campo es <strong>requerido</strong>
+        </mat-error>
+      </mat-form-field>
+
+
+      <div class="row">
+        <div class="col">
+          <div class="table-responsive">
+            <table class="table">
+              <thead class="thead-dark">
+                <tr>
+                  <th>ID</th>
+                  <th>Pasatiempo</th>
+                  <th>Borrar</th>
+                </tr>
+              </thead>
+              <tbody formArrayName="pasatiempos">
+                <tr *ngFor="let control of pasatiempos.controls; let i = index">
+                  <td> {{ i + 1 }} </td>
+                  <td>
+                    <mat-form-field class="w-100">
+                      <mat-label>Descripción</mat-label>
+                      <input matInput type="text" [formControlName]="i">
+                    </mat-form-field>
+                  </td>
+                  <td>
+                    <button mat-raised-button color="warn" (click)="borrarPasatiempo(i)">
+                      Borrar
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <button mat-raised-button color="accent" class="w-100" type="button" (click)="agregarPasatiempo()"> + Agregar
+          </button>
+
+        </div>
+      </div>
+
+
+      <div class="row mt-5 justify-content-around center-xs">
+        <button mat-raised-button color="primary" type="submit" class="w-25">Guardar</button>
+      </div>
+    </form>
+  </div>
+
+  <app-form-value [value]="formReactive.value" [formValid]="formReactive.valid" [formInvalid]="formReactive.invalid"
+    [formSubmitted]="formSubmitted"></app-form-value>
+</div>

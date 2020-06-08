@@ -1,0 +1,80 @@
+<div class="jumbotron jumbotron-fluid bg" style="background-color: #FA8072; color: #fff;">
+  <div class="container">
+    <h1 class="display-4">Template Forms</h1>
+  </div>
+</div>
+
+<div class="container">
+  <div class="card-form p-4">
+    <form autocomplete="off" #form="ngForm" (ngSubmit)="guardar(form)">
+
+      <mat-form-field class="w-100">
+        <mat-label>Nombre</mat-label>
+        <input matInput type="text" name="nombre" required minlength="5" [(ngModel)]="usuario.nombre" #nombre="ngModel"
+          [class.is-invalid]="nombre.invalid && nombre.touched">
+        <mat-error *ngIf="nombre.invalid && nombre.touched && nombre.hasError('required')">
+          Este campo es <strong>requerido</strong>
+        </mat-error>
+        <mat-error *ngIf="nombre.invalid && nombre.touched && nombre.hasError('minlength')">
+          Este campo debe contener <strong>5 letras</strong> como mínimo
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="w-100">
+        <mat-label>Apellidos</mat-label>
+        <input matInput type="text" name="apellido" required minlength="5" [(ngModel)]="usuario.apellido"
+          #apellido="ngModel" [class.is-invalid]="apellido.invalid && apellido.touched">
+        <mat-error *ngIf="apellido.invalid && apellido.touched && apellido.hasError('required')">
+          Este campo es <strong>requerido</strong>
+        </mat-error>
+        <mat-error *ngIf="apellido.invalid && apellido.touched && apellido.hasError('minlength')">
+          Este campo debe contener <strong>5 letras</strong> como mínimo
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="w-100">
+        <mat-label>Correo</mat-label>
+        <input matInput type="email" name="correo" required minlength="5"
+          pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" [(ngModel)]="usuario.correo" #correo="ngModel"
+          [class.is-invalid]="correo.invalid && correo.touched">
+        <mat-error *ngIf="correo.invalid && correo.touched && correo.hasError('required')">
+          Este campo es <strong>requerido</strong>
+        </mat-error>
+        <mat-error *ngIf="correo.invalid && correo.touched && correo.hasError('pattern')">
+          Correo <strong>inválido</strong>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="w-100">
+        <mat-label>País</mat-label>
+        <mat-select name="pais" required [disabled]="paises.length === 0"
+          [class.is-invalid]="pais.invalid && pais.touched" [(ngModel)]="usuario.pais" #pais="ngModel">
+          <mat-option *ngFor="let item of paises" [value]="item.codigo">{{item.nombre}}</mat-option>
+        </mat-select>
+        <mat-error *ngIf="pais.invalid && pais.touched">
+          Este campo es <strong>requerido</strong>
+        </mat-error>
+      </mat-form-field>
+
+      <label style="margin-right: 30px;">Seleccione el sexo: </label><br>
+      <mat-radio-group required [(ngModel)]="usuario.genero" name="genero" #genero="ngModel">
+        <mat-radio-button value="M">Masculino
+        </mat-radio-button>
+        <mat-radio-button value="F">Femenino
+        </mat-radio-button>
+        <mat-error *ngIf="genero.invalid && genero.touched">
+          <span style="font-size: 12px;">Este campo es <strong>requerido</strong></span>
+        </mat-error>
+      </mat-radio-group>
+
+
+      <div class="row mt-3 justify-content-around center-xs">
+        <button mat-raised-button color="primary" type="submit" class="w-25">Guardar</button>
+      </div>
+    </form>
+
+  </div>
+  <app-form-value [value]="usuario" [formValid]="form.valid" [formInvalid]="form.invalid"
+    [formSubmitted]="formSubmitted"></app-form-value>
+
+</div>
